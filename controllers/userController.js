@@ -15,23 +15,22 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-  // Get a single student
-  // getSingleStudent(req, res) {
-  //   Student.findOne({ _id: req.params.studentId })
-  //     .select('-__v')
-  //     .then(async (student) =>
-  //       !student
-  //         ? res.status(404).json({ message: 'No student with that ID' })
-  //         : res.json({
-  //             student,
-  //             grade: await grade(req.params.studentId),
-  //           })
-  //     )
-  //     .catch((err) => {
-  //       console.log(err);
-  //       return res.status(500).json(err);
-  //     });
-  // },
+  // Get a single user
+  getSingleUser(req, res) {
+    User.findOne({ _id: req.params.userId })
+      .select('-__v')
+      .then(async (user) =>
+        !user
+          ? res.status(404).json({ message: 'No user with that ID' })
+          : res.json({
+              user,
+            })
+      )
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
   // create a new user
   createUser(req, res) {
     User.create(req.body)
