@@ -32,12 +32,12 @@ module.exports = {
   //       return res.status(500).json(err);
   //     });
   // },
-  // // create a new student
-  // createStudent(req, res) {
-  //   Student.create(req.body)
-  //     .then((student) => res.json(student))
-  //     .catch((err) => res.status(500).json(err));
-  // },
+  // create a new user
+  createUser(req, res) {
+    User.create(req.body)
+      .then((user) => res.json(user))
+      .catch((err) => res.status(500).json(err));
+  },
   // // Delete a student and remove them from the course
   // deleteStudent(req, res) {
   //   Student.findOneAndRemove({ _id: req.params.studentId })
