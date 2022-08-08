@@ -3,7 +3,7 @@ const {
   getUsers,
   getSingleUser,
   createUser,
-//   updateUser,
+  updateUser,
   deleteUser,
 //   createFriend,
 //   removeFriend
@@ -19,6 +19,6 @@ const {
 router.route('/').get(getUsers).post(createUser);
 
 // /api/users/:userId
-router.route('/:userId').get(getSingleUser).delete(deleteUser);
+router.route('/:userId').get(getSingleUser).delete(deleteUser).put(updateUser);
 
 module.exports = router;
