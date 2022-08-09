@@ -106,20 +106,21 @@ async createThought(req, res) {
       )
       .catch((err) => res.status(500).json(err));
   },
-//   //Removes friend from user
-//   removeFriend(req, res) {
-//     User.findOneAndUpdate(
-//       { _id: req.params.userId },
-//       { $pull: { friends: req.params.friendId } },
-//       { runValidators: true, new: true }
-//     )
-//       .then((user) =>
-//         !user
-//           ? res
-//               .status(404)
-//               .json({ message: 'No user found with that ID :(' })
-//           : res.json(user)
-//       )
-//       .catch((err) => res.status(500).json(err));
-//   },
+  //Removes reaction from thought
+  removeReaction(req, res) {
+    console.log(req.body);
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      { $pull: { reactions: {reactionId: req.body.reactionId } } },
+      { runValidators: true, new: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res
+              .status(404)
+              .json({ message: 'No thought found with that ID :(' })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 };
