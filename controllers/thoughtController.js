@@ -60,11 +60,11 @@ async createThought(req, res) {
             res.status(500).json(err);
           });
 },
-  // Delete a thoght
+// Delete a thoght
   deleteThought(req, res) {
     Thought.findOneAndRemove({ _id: req.params.thoughtId })
       .then((thought) =>
-        !thought
+      !thought
           ? res.status(404).json({ message: 'No such thought exists' })
           : res.json({ message: 'Thought successfully deleted' })
       )
@@ -74,22 +74,22 @@ async createThought(req, res) {
       });
   },
 
-//   // Update a user by id
-//   updateUser(req, res) {
-//     User.findOneAndUpdate(
-//       { _id: req.params.userId },
-//       req.body,
-//       { new: true }
-//     )
-//       .then((user) =>
-//         !user
-//           ? res
-//               .status(404)
-//               .json({ message: 'No user found with that ID :(' })
-//           : res.json(user)
-//       )
-//       .catch((err) => res.status(500).json(err));
-//   },
+  // Update a thought by id
+  updateThought(req, res) {
+    Thought.findOneAndUpdate(
+      { _id: req.params.thoughtId },
+      req.body,
+      { new: true }
+    )
+      .then((thought) =>
+        !thought
+          ? res
+            .status(404)
+            .json({ message: 'No thought found with that ID :(' })
+          : res.json(thought)
+      )
+      .catch((err) => res.status(500).json(err));
+  },
 //   //Creates and adds friend to user
 //   createFriend(req, res) {
 //     User.findOneAndUpdate(
