@@ -3,6 +3,39 @@ const mongoose = require('mongoose');
 const { ObjectId } = require('mongoose').Types;
 const { Schema, model } = require('mongoose');
 
+const reactionSchema = new mongoose.Schema(
+  {
+    reactionId: { 
+      type: ObjectId,
+      default: new ObjectId,
+    },
+    reactionBody: {
+      type: String,
+      required: true,
+      maxLength: 280,
+    },
+    username: {
+      type: String,
+      required: true,
+    },
+    createdAt: {
+      type: Date,
+      default: Date.now,
+    },
+  },
+  {
+    toJSON: {
+      virtuals: true,
+    },
+    id: false,
+  }
+);
+
+reactionSchema.virtual('formattedReactionDate').get(function () {
+  const now = new Date(this.createdAt);
+  return now.toDateString();
+});
+
 // Construct a new instance of the schema class
 const thoughtSchema = new mongoose.Schema(
   {
@@ -21,26 +54,8 @@ const thoughtSchema = new mongoose.Schema(
       required: true,
     },
     reactions: {
-      type: {
-        reactionId: { 
-          type: ObjectId,
-          default: new ObjectId,
-        },
-        reactionBody: {
-          type: String,
-          required: true,
-          maxLength: 280,
-        },
-        username: {
-          type: String,
-          required: true,
-        },
-        createdAt: {
-          type: Date,
-          default: Date.now,
-        },
-      },
-      required: false 
+      type: [reactionSchema],
+      required: false
     },
   },
   {
@@ -51,13 +66,12 @@ const thoughtSchema = new mongoose.Schema(
   }
 );
 
-thoughtSchema.virtual('formattedThoughtDate').get(function () {
-  const now = new Date(this.createdAt);
-  return now.toDateString();
+thoughtSchema.virtual('reactionCount').get(function () {
+  return this.reactions.length;
 });
 
-thoughtSchema.virtual('reactions.formattedReactionDate').get(function () {
-  const now = new Date(this.reactions?.createdAt);
+thoughtSchema.virtual('formattedThoughtDate').get(function () {
+  const now = new Date(this.createdAt);
   return now.toDateString();
 });
 
