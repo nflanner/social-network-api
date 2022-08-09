@@ -2,13 +2,17 @@
 
 ## Your Task
 
-MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. Over the last part of this course, you’ll use several of the technologies that social networking platforms use in their full-stack applications. Because the foundation of these applications is data, it’s important that you understand how to build and structure the API first.
+MongoDB is a popular choice for many social networks due to its speed with large amounts of data and flexibility with unstructured data. Because the foundation of full stack applications is data, it’s important to understand how to build and structure the API's first.
 
-Your homework is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. You’ll use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition to using the [Express.js](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages, you may also optionally use a JavaScript date library of your choice or the native JavaScript `Date` object to format timestamps.
+The goal of this project is to build an API for a social network web application where users can share their thoughts, react to friends’ thoughts, and create a friend list. This utilizes use Express.js for routing, a MongoDB database, and the Mongoose ODM. In addition, it uses the [Express.js](https://www.npmjs.com/package/express) and [Mongoose](https://www.npmjs.com/package/mongoose) packages.
 
-No seed data is provided, so you’ll need to create your own data using Insomnia after you’ve created your API.
+Because this application won’t be deployed, a walkthrough video and link to the associated GitHub repository are provided in the section below.
 
-Because this application won’t be deployed, you’ll also need to create a walkthrough video that demonstrates its functionality and all of the following acceptance criteria being met. You’ll need to submit a link to the video and add it to the README of your project.
+## Links to GitHub and Walkthrough Video
+
+[GitHub](https://github.com/nflanner/social-network-api)
+
+[Walkthrough Video](https://drive.google.com/file/d/1ou46lE8FOzOt7mlHEIj5htnC34LqULhS/view)
 
 ## User Story
 
@@ -56,13 +60,8 @@ The following animation shows the POST and DELETE routes for a user’s friend l
 
 In addition to this, your walkthrough video should show the POST and DELETE routes for reactions to thoughts being tested in Insomnia.
 
-## Getting Started
+## Models
 
-Be sure to have MongoDB installed on your machine. Follow the [MongoDB installation guide on The Full-Stack Blog](https://coding-boot-camp.github.io/full-stack/mongodb/how-to-install-mongodb) to install MongoDB locally.
-
-Use the following guidelines to set up your models and API routes:
-
-### Models
 
 **User**:
 
@@ -86,7 +85,7 @@ Use the following guidelines to set up your models and API routes:
 
 **Schema Settings**:
 
-Create a virtual called `friendCount` that retrieves the length of the user's `friends` array field on query.
+A virtual called `friendCount` that retrieves the length of the user's `friends` array field on query.
 
 ---
 
@@ -111,7 +110,7 @@ Create a virtual called `friendCount` that retrieves the length of the user's `f
 
 **Schema Settings**:
 
-Create a virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query.
+A virtual called `reactionCount` that retrieves the length of the thought's `reactions` array field on query.
 
 ---
 
@@ -137,7 +136,7 @@ Create a virtual called `reactionCount` that retrieves the length of the thought
 
 **Schema Settings**:
 
-This will not be a model, but rather will be used as the `reaction` field's subdocument schema in the `Thought` model.
+This is not a model, but rather is used as the `reaction` field's subdocument schema in the `Thought` model.
 
 ### API Routes
 

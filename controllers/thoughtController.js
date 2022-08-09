@@ -108,7 +108,6 @@ async createThought(req, res) {
   },
   //Removes reaction from thought
   removeReaction(req, res) {
-    console.log(req.body);
     Thought.findOneAndUpdate(
       { _id: req.params.thoughtId },
       { $pull: { reactions: {reactionId: req.body.reactionId } } },
