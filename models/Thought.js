@@ -1,6 +1,7 @@
 // Require schema and model from mongoose
 const mongoose = require('mongoose');
 const { ObjectId } = require('mongoose').Types;
+const { Schema, model } = require('mongoose');
 
 // Construct a new instance of the schema class
 const thoughtSchema = new mongoose.Schema(
@@ -57,6 +58,4 @@ thoughtSchema.virtual('formattedReactionDate').get(function () {
   return now.toDateString();
 });
 
-const Thought = mongoose.model('thought', thoughtSchema);
-
-module.exports = Thought;
+module.exports = mongoose.model('thought', thoughtSchema);
