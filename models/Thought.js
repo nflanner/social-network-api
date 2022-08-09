@@ -21,23 +21,26 @@ const thoughtSchema = new mongoose.Schema(
       required: true,
     },
     reactions: {
-      reactionId: { 
-        type: ObjectId,
-        default: new ObjectId,
+      type: {
+        reactionId: { 
+          type: ObjectId,
+          default: new ObjectId,
+        },
+        reactionBody: {
+          type: String,
+          required: true,
+          maxLength: 280,
+        },
+        username: {
+          type: String,
+          required: true,
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
       },
-      reactionBody: {
-        type: String,
-        required: true,
-        maxLength: 280,
-      },
-      username: {
-        type: String,
-        required: true,
-      },
-      createdAt: {
-        type: Date,
-        default: Date.now,
-      },
+      required: false 
     },
   },
   {
@@ -53,8 +56,8 @@ thoughtSchema.virtual('formattedThoughtDate').get(function () {
   return now.toDateString();
 });
 
-thoughtSchema.virtual('formattedReactionDate').get(function () {
-  const now = new Date(this.reactions.createdAt);
+thoughtSchema.virtual('reactions.formattedReactionDate').get(function () {
+  const now = new Date(this.reactions?.createdAt);
   return now.toDateString();
 });
 

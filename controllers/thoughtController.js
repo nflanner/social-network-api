@@ -33,41 +33,36 @@ module.exports = {
 //       });
 //   },
 // create a new user
-createThought(req, res) {
+async createThought(req, res) {
+    const thoughtUserId = req.body.userId;
     Thought.create({
         thoughtText: req.body.thoughtText,
         username: req.body.username,
     })
-    //   .then((thought) => res.json(thought))
-        .then((thought => {
-            User.findOneAndUpdate(
-                { _id: req.params.userId },
-                { $addToSet: { thoughts: thought } },
-                { runValidators: true, new: true }
-            )
-        }))
+        .then((thought) => {
+            console.log(req.body.userId)
+            console.log(thought._id)
+            console.log(thoughtUserId)
+            console.log(thought._id.toString())
+            return !thought
+                ? res.status(500).json(err)
+                : User.findOneAndUpdate(
+                    { _id: req.body.userId },
+                    { $addToSet: { thoughts: thought._id.toString() } },
+                    { new: true }
+                )
+        })
         .then((user) =>
             !user
-                ? res
-                    .status(404)
-                    .json({ message: 'No user found with that ID :(' })
+                ? res.status(404).json({
+                    message: 'thought added, but no user found',
+                  })
                 : res.json(user)
         )
-        .catch((err) => res.status(500).json(err));
-
-    // User.findOneAndUpdate(
-    //     { _id: req.params.userId },
-    //     { $addToSet: { thoughts: thought } },
-    //     { runValidators: true, new: true }
-    // )
-    // .then((user) =>
-    //     !user
-    //         ? res
-    //             .status(404)
-    //             .json({ message: 'No user found with that ID :(' })
-    //         : res.json(user)
-    // )
-    // .catch((err) => res.status(500).json(err));
+        .catch((err) => {
+            console.log(err);
+            res.status(500).json(err);
+          });
 },
 //   // Delete a user
 //   deleteUser(req, res) {
