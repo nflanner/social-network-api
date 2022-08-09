@@ -16,22 +16,22 @@ module.exports = {
         return res.status(500).json(err);
       });
   },
-//   // Get a single user
-//   getSingleUser(req, res) {
-//     User.findOne({ _id: req.params.userId })
-//       .select('-__v')
-//       .then(async (user) =>
-//         !user
-//           ? res.status(404).json({ message: 'No user with that ID' })
-//           : res.json({
-//               user,
-//             })
-//       )
-//       .catch((err) => {
-//         console.log(err);
-//         return res.status(500).json(err);
-//       });
-//   },
+  // Get a single thought
+  getSingleThought(req, res) {
+    Thought.findOne({ _id: req.params.thoughtId })
+      .select('-__v')
+      .then(async (thought) =>
+        !thought
+          ? res.status(404).json({ message: 'No thought with that ID' })
+          : res.json({
+              thought,
+            })
+      )
+      .catch((err) => {
+        console.log(err);
+        return res.status(500).json(err);
+      });
+  },
 // create a new user
 async createThought(req, res) {
     const thoughtUserId = req.body.userId;
@@ -40,10 +40,6 @@ async createThought(req, res) {
         username: req.body.username,
     })
         .then((thought) => {
-            console.log(req.body.userId)
-            console.log(thought._id)
-            console.log(thoughtUserId)
-            console.log(thought._id.toString())
             return !thought
                 ? res.status(500).json(err)
                 : User.findOneAndUpdate(
